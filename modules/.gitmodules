@@ -1,0 +1,2 @@
+[submodule "AspxParser"]
+	branch = separate-close-tags

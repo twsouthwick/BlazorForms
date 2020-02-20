@@ -1,0 +1,3 @@
+[submodule "modules/AspxParser"]
+	path = modules/AspxParser
+	url = https://github.com/twsouthwick/AspxParser
