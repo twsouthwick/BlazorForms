@@ -1,16 +1,22 @@
 ﻿using AspxParser;
+using System;
 using System.Diagnostics;
 using System.IO;
 
 namespace BlazorForms
 {
-    internal class WebFormsToBlazor : DepthFirstAspxVisitor<object>
+    internal class WebFormsToBlazor : DepthFirstAspxVisitor<object>, IDisposable
     {
         private readonly TextWriter _writer;
 
         public WebFormsToBlazor(TextWriter writer)
         {
             _writer = writer;
+        }
+
+        public void Dispose()
+        {
+            _writer.Dispose();
         }
 
         public override object Visit(AspxNode.AspxDirective node)

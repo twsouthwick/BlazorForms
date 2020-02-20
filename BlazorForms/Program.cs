@@ -1,37 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using System;
 using System.IO;
-using System.Linq;
 
 namespace BlazorForms
 {
     class Program
     {
-        static void Main(string[] args)
+        /// <summary>
+        /// Main entry point
+        /// </summary>
+        /// <param name="input">Root directory of WebForms controls</param>
+        /// <param name="isNet35">Flag to indicate whether WebForms is .NET 3.5 (otherwise assumed to be 4.x)</param>
+        /// <param name="out">Directory to write output (default is current working directory).</param>
+        static void Main(DirectoryInfo input, bool isNet35 = false, DirectoryInfo @out = null)
         {
-            var rootDirectory = args[0];
-            var files = GetFiles(rootDirectory);
-            var parser = new AspxParser.AspxParser(rootDirectory);
+            var services = new ServiceCollection();
 
-            foreach (var file in files)
+            services.AddLogging(l =>
             {
-                var fileName = Path.GetFileName(file);
-                var fileCode = File.ReadAllText(file);
+                l.AddConsole();
+            });
+            services.AddSingleton<WebFormsConverter>();
 
-                var source = new AspxParser.AspxSource(fileName, fileCode);
-                var aspxTree = parser.Parse(source);
+            using (var provider = services.BuildServiceProvider())
+            {
+                var options = new WebFormsConverterOptions
+                {
+                    RootDirectory = input,
+                    IsNet35 = isNet35,
+                    OutputDirectory = @out ?? GetDefaultDirectory(input),
+                };
 
-                var converter = new WebFormsToBlazor(Console.Out);
-                var result = aspxTree.RootNode.Accept(converter);
+                provider.GetRequiredService<WebFormsConverter>().Run(options);
             }
         }
 
-        private static IEnumerable<string> GetFiles(string rootDirectory)
-        {
-            var aspx = Directory.EnumerateFiles(rootDirectory, "*.aspx", SearchOption.AllDirectories);
-            var ascx = Directory.EnumerateFiles(rootDirectory, "*.ascx", SearchOption.AllDirectories);
-
-            return aspx.Concat(ascx);
-        }
+        private static DirectoryInfo GetDefaultDirectory(DirectoryInfo root) => new DirectoryInfo(Path.Combine(Environment.CurrentDirectory, root.Name));
     }
 }
