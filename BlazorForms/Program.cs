@@ -13,14 +13,17 @@ namespace BlazorForms
         /// <param name="input">Root directory of WebForms controls</param>
         /// <param name="isNet35">Flag to indicate whether WebForms is .NET 3.5 (otherwise assumed to be 4.x)</param>
         /// <param name="out">Directory to write output (default is current working directory).</param>
-        static void Main(DirectoryInfo input, bool isNet35 = false, DirectoryInfo @out = null)
+        /// <param name="verbose">Flag to indicate of output should be verbose.</param>
+        static void Main(DirectoryInfo input, bool isNet35 = false, DirectoryInfo @out = null, bool verbose = false)
         {
             var services = new ServiceCollection();
 
             services.AddLogging(l =>
             {
                 l.AddConsole();
+                l.SetMinimumLevel(verbose ? LogLevel.Trace : LogLevel.Information);
             });
+
             services.AddSingleton<WebFormsConverter>();
 
             using (var provider = services.BuildServiceProvider())

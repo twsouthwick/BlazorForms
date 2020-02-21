@@ -46,9 +46,12 @@ namespace BlazorForms
         {
             Debug.Assert(node.Children.Count == 0);
 
-            _writer.Write("@{");
+            if (!node.Expression.AsSpan().Trim().StartsWith("}", StringComparison.Ordinal))
+            {
+                _writer.Write("@");
+            }
+
             _writer.Write(node.Expression);
-            _writer.Write("}");
 
             return null;
         }
