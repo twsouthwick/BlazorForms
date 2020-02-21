@@ -7,11 +7,11 @@ namespace BlazorForms
 {
     internal class WebFormsToBlazor : DepthFirstAspxVisitor<object>, IDisposable
     {
-        private readonly TextWriter _writer;
+        private readonly RazorTextWriter _writer;
 
         public WebFormsToBlazor(TextWriter writer)
         {
-            _writer = writer;
+            _writer = new RazorTextWriter(writer);
         }
 
         public void Dispose()
@@ -26,18 +26,14 @@ namespace BlazorForms
 
         public override object Visit(AspxNode.CloseHtmlTag node)
         {
-            _writer.Write("</");
-            _writer.Write(node.Name);
-            _writer.Write(">");
+            _writer.EndElement();
 
             return null;
         }
 
         public override object Visit(AspxNode.CloseAspxTag node)
         {
-            _writer.Write("</");
-            _writer.Write(node.ControlName);
-            _writer.Write(">");
+            _writer.EndElement();
 
             return null;
         }
@@ -46,28 +42,21 @@ namespace BlazorForms
         {
             Debug.Assert(node.Children.Count == 0);
 
-            if (!node.Expression.AsSpan().Trim().StartsWith("}", StringComparison.Ordinal))
-            {
-                _writer.Write("@");
-            }
-
-            _writer.Write(node.Expression);
+            _writer.StartCodeBlock(node.Expression);
 
             return null;
         }
 
         public override object Visit(AspxNode.CodeRenderEncode node)
         {
-            _writer.Write("@");
-            _writer.Write(node.Expression);
+            _writer.WriteCodeExpression(node.Expression);
 
             return null;
         }
 
         public override object Visit(AspxNode.CodeRenderExpression node)
         {
-            _writer.Write("@");
-            _writer.Write(node.Expression);
+            _writer.WriteCodeExpression(node.Expression);
 
             return null;
         }
@@ -79,21 +68,21 @@ namespace BlazorForms
 
         public override object Visit(AspxNode.Literal node)
         {
-            _writer.Write(node.Text);
+            _writer.WriteString(node.Text);
 
             return null;
         }
 
         public override object Visit(AspxNode.OpenAspxTag node)
         {
-            WriteTag(node.ControlName, node.Attributes, false);
+            _writer.StartElement(node.ControlName, node.Attributes);
 
             return base.Visit(node);
         }
 
         public override object Visit(AspxNode.OpenHtmlTag node)
         {
-            WriteTag(node.Name, node.Attributes, false);
+            _writer.StartElement(node.Name, node.Attributes);
 
             return base.Visit(node);
         }
@@ -105,40 +94,18 @@ namespace BlazorForms
 
         public override object Visit(AspxNode.SelfClosingAspxTag node)
         {
-            WriteTag(node.ControlName, node.Attributes, true);
+            _writer.StartElement(node.ControlName, node.Attributes);
+            _writer.EndElement();
 
             return base.Visit(node);
         }
 
         public override object Visit(AspxNode.SelfClosingHtmlTag node)
         {
-            WriteTag(node.Name, node.Attributes, true);
+            _writer.StartElement(node.Name, node.Attributes);
+            _writer.EndElement();
 
             return base.Visit(node);
-        }
-
-        private void WriteTag(string name, TagAttributes attributes, bool isSelfClosing)
-        {
-            _writer.Write("<");
-            _writer.Write(name);
-
-            foreach (var attribute in attributes)
-            {
-                _writer.Write(" ");
-                _writer.Write(attribute.Key);
-                _writer.Write("=\"");
-                _writer.Write(attribute.Value);
-                _writer.Write("\"");
-            }
-
-            if (isSelfClosing)
-            {
-                _writer.Write("/>");
-            }
-            else
-            {
-                _writer.Write(">");
-            }
         }
     }
 }

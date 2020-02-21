@@ -19,31 +19,25 @@ namespace BlazorForms.Tests
         [Fact]
         public void SelfClosingHtml()
         {
-            TestConverter("<div/>", "<div/>");
+            TestConverter("<div/>", "<div />");
         }
 
         [Fact]
         public void OpenCloseHtml()
         {
-            TestConverter("<div></div>", "<div></div>");
+            TestConverter("<div>content</div>", "<div>content</div>");
         }
 
         [Fact]
         public void OpenCloseAspx()
         {
-            TestConverter("<asp:Label></asp:Label>", "<Label></Label>");
+            TestConverter("<asp:Label>content</asp:Label>", "<Label>content</Label>");
         }
 
         [Fact]
         public void AspxSelfClosing()
         {
-            TestConverter("<asp:Label />", "<Label/>");
-        }
-
-        [Fact]
-        public void Literal()
-        {
-            TestConverter("hello", "hello");
+            TestConverter("<asp:Label />", "<Label />");
         }
     }
 }
