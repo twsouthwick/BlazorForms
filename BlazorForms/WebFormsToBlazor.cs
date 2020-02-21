@@ -58,12 +58,18 @@ namespace BlazorForms
 
         public override object Visit(AspxNode.CodeRenderEncode node)
         {
-            return base.Visit(node);
+            _writer.Write("@");
+            _writer.Write(node.Expression);
+
+            return null;
         }
 
         public override object Visit(AspxNode.CodeRenderExpression node)
         {
-            return base.Visit(node);
+            _writer.Write("@");
+            _writer.Write(node.Expression);
+
+            return null;
         }
 
         public override object Visit(AspxNode.DataBinding node)
@@ -73,14 +79,15 @@ namespace BlazorForms
 
         public override object Visit(AspxNode.Literal node)
         {
-            Debug.Assert(node.Children.Count == 0);
             _writer.Write(node.Text);
+
             return null;
         }
 
         public override object Visit(AspxNode.OpenAspxTag node)
         {
             WriteTag(node.ControlName, node.Attributes, false);
+
             return base.Visit(node);
         }
 
@@ -99,12 +106,14 @@ namespace BlazorForms
         public override object Visit(AspxNode.SelfClosingAspxTag node)
         {
             WriteTag(node.ControlName, node.Attributes, true);
+
             return base.Visit(node);
         }
 
         public override object Visit(AspxNode.SelfClosingHtmlTag node)
         {
             WriteTag(node.Name, node.Attributes, true);
+
             return base.Visit(node);
         }
 
