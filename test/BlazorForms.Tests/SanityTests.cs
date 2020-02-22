@@ -35,6 +35,18 @@ namespace BlazorForms.Tests
         }
 
         [Fact]
+        public void SimpleCodeExpression()
+        {
+            TestConverter("<%=someVariable%>", "@someVariable");
+        }
+
+        [Fact]
+        public void SimpleCodeBlock()
+        {
+            TestConverter("<% foreach(var i in other) { %> <div><%=i%></div> <% } %>", "@ foreach(var i in other) {<div>@i</div> }");
+        }
+
+        [Fact]
         public void AspxSelfClosing()
         {
             TestConverter("<asp:Label />", "<Label />");

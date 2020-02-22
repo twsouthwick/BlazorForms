@@ -36,12 +36,16 @@ namespace BlazorForms
 
         public void WriteString(string str)
         {
-            _xmlWriter.WriteString(str);
+            _xmlWriter.WriteRaw(str);
         }
 
         public void StartCodeBlock(string code)
         {
-            _xmlWriter.WriteRaw("@");
+            if (!code.AsSpan().TrimStart().StartsWith("}", StringComparison.Ordinal))
+            {
+                _xmlWriter.WriteRaw("@ ");
+            }
+
             _xmlWriter.WriteRaw(code);
         }
 
