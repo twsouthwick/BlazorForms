@@ -7,46 +7,43 @@ namespace BlazorForms
 {
     internal class RazorTextWriter : IDisposable
     {
-        private readonly XmlWriter _xmlWriter;
+        private readonly HtmlTextWriter _writer;
 
         public RazorTextWriter(TextWriter writer)
         {
-            _xmlWriter = XmlWriter.Create(writer, new XmlWriterSettings
-            {
-                OmitXmlDeclaration = true
-            });
+            _writer = new HtmlTextWriter(writer);
         }
 
-        public void Dispose() => _xmlWriter.Dispose();
+        public void Dispose() => _writer.Dispose();
 
         public void StartElement(string name, TagAttributes attributes)
         {
-            _xmlWriter.WriteStartElement(name);
+            _writer.RenderBeginTag(name);
 
             foreach (var attribute in attributes)
             {
-                _xmlWriter.WriteAttributeString(attribute.Key, attribute.Value);
+                _writer.WriteAttribute(attribute.Key, attribute.Value);
             }
         }
 
         public void EndElement()
         {
-            _xmlWriter.WriteEndElement();
+            _writer.RenderEndTag();
         }
 
         public void WriteString(string str)
         {
-            _xmlWriter.WriteRaw(str);
+            _writer.Write(str);
         }
 
         public void StartCodeBlock(string code)
         {
             if (!code.AsSpan().TrimStart().StartsWith("}", StringComparison.Ordinal))
             {
-                _xmlWriter.WriteRaw("@ ");
+                _writer.Write("@ ");
             }
 
-            _xmlWriter.WriteRaw(code);
+            _writer.Write(code);
         }
 
         public void EndCodeBlock()
@@ -56,13 +53,13 @@ namespace BlazorForms
 
         public void WriteCode(string expression)
         {
-            _xmlWriter.WriteRaw(expression);
+            _writer.Write(expression);
         }
 
         public void WriteCodeExpression(string input)
         {
-            _xmlWriter.WriteRaw("@");
-            _xmlWriter.WriteRaw(input);
+            _writer.Write("@");
+            _writer.Write(input);
         }
     }
 }

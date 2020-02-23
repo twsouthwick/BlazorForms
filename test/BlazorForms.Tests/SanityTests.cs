@@ -19,7 +19,7 @@ namespace BlazorForms.Tests
         [Fact]
         public void SelfClosingHtml()
         {
-            TestConverter("<div/>", "<div />");
+            TestConverter("<br/>", "<br />");
         }
 
         [Fact]
