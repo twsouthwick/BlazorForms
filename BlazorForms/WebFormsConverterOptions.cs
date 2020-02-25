@@ -78,6 +78,10 @@ namespace BlazorForms
         public TextWriter OpenWrite(string name)
         {
             var newPath = Path.Combine(OutputDirectory.FullName, name);
+            if (!OutputDirectory.Exists)
+            {
+                OutputDirectory.Create();
+            }
             newPath = Path.ChangeExtension(newPath, "razor");
 
             var output = File.OpenWrite(newPath);
