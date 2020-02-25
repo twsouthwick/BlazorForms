@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "BlazorForms": {
-      "commandName": "Project",
-      "commandLineArgs": "--input C:\\Users\\tasou\\Projects\\Engagements\\Epic\\WebFormsMigration\\SampleApps\\CustomRenderedControlSample\\SampleWebUI"
-    }
-  }
-}

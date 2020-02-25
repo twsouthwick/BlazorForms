@@ -20,4 +20,8 @@
     <PackageReference Include="System.CommandLine.Rendering" Version="0.3.0-alpha.20104.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
 </Project>
