@@ -98,6 +98,7 @@
         private TagStackEntry[] _endTags;
         //private HttpWriter _httpWriter;
         private int _inlineCount;
+        private bool _forceInline;
         private bool _isDescendant;
         //private RenderStyle[] _styleList;
         private int _tagIndex;
@@ -125,7 +126,7 @@
             RegisterTag("blockquote", HtmlTextWriterTag.Blockquote, TagType.Other);
             RegisterTag("body", HtmlTextWriterTag.Body, TagType.Other);
             // Devdiv 852940, BR is a self-closing tag
-            RegisterTag("br", HtmlTextWriterTag.Br, TagType.NonClosing );
+            RegisterTag("br", HtmlTextWriterTag.Br, TagType.NonClosing);
             RegisterTag("button", HtmlTextWriterTag.Button, TagType.Inline);
             RegisterTag("caption", HtmlTextWriterTag.Caption, TagType.Other);
             RegisterTag("center", HtmlTextWriterTag.Center, TagType.Other);
@@ -1236,7 +1237,7 @@
                 {
                     _inlineCount += 1;
                 }
-                else
+                else if (_forceInline)
                 {
                     // writeline and indent before rendering content
                     WriteLine();
@@ -1285,15 +1286,15 @@
                     _inlineCount -= 1;
                     // Never inject crlfs at end of inline tags.
                     //
-                    Write(endTag);
                 }
-                else
+                else if (_forceInline)
                 {
                     // unindent if not an inline tag
                     WriteLine();
                     this.Indent--;
-                    Write(endTag);
                 }
+
+                Write(endTag);
             }
         }
 

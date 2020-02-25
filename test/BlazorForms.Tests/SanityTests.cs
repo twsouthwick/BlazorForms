@@ -43,7 +43,18 @@ namespace BlazorForms.Tests
         [Fact]
         public void SimpleCodeBlock()
         {
-            TestConverter("<% foreach(var i in other) { %> <div><%=i%></div> <% } %>", "@ foreach(var i in other) {<div>@i</div> }");
+            var webforms = @"<% foreach(var i in other) { %>
+<div>
+    <%=i%>
+</div>
+}";
+            var razor = @"@ foreach(var i in other) {
+<div>
+    @i
+</div>
+}";
+
+            TestConverter(webforms, razor);
         }
 
         [Fact]

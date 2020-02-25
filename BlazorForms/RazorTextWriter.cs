@@ -11,7 +11,7 @@ namespace BlazorForms
 
         public RazorTextWriter(TextWriter writer)
         {
-            _writer = new HtmlTextWriter(writer);
+            _writer = new HtmlTextWriter(writer, "  ");
         }
 
         public void Dispose() => _writer.Dispose();
@@ -44,6 +44,7 @@ namespace BlazorForms
             }
 
             _writer.Write(code);
+            _writer.WriteLine(string.Empty);
         }
 
         public void EndCodeBlock()

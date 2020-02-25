@@ -28,14 +28,14 @@ namespace BlazorForms
         {
             _writer.EndElement();
 
-            return null;
+            return base.Visit(node);
         }
 
         public override object Visit(AspxNode.CloseAspxTag node)
         {
             _writer.EndElement();
 
-            return null;
+            return base.Visit(node);
         }
 
         public override object Visit(AspxNode.CodeRender node)
@@ -44,21 +44,21 @@ namespace BlazorForms
 
             _writer.StartCodeBlock(node.Expression);
 
-            return null;
+            return base.Visit(node);
         }
 
         public override object Visit(AspxNode.CodeRenderEncode node)
         {
             _writer.WriteCodeExpression(node.Expression);
 
-            return null;
+            return base.Visit(node);
         }
 
         public override object Visit(AspxNode.CodeRenderExpression node)
         {
             _writer.WriteCodeExpression(node.Expression);
 
-            return null;
+            return base.Visit(node);
         }
 
         public override object Visit(AspxNode.DataBinding node)
@@ -70,7 +70,7 @@ namespace BlazorForms
         {
             _writer.WriteString(node.Text);
 
-            return null;
+            return base.Visit(node);
         }
 
         public override object Visit(AspxNode.OpenAspxTag node)
