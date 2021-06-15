@@ -4,20 +4,7 @@ using System.Text;
 
 namespace System.Web
 {
-    internal static class HttpEncoderUtility
-    {
-        internal static bool IsUrlSafeChar(char ch)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal static string IntToHex(int v)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    internal static class SR
+    internal static partial class SR
     {
         public static string GetString(string input)
             => input;
