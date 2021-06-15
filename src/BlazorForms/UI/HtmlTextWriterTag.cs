@@ -1,7 +1,19 @@
-﻿namespace BlazorForms
-{
-    internal enum HtmlTextWriterTag
-    {
+//------------------------------------------------------------------------------
+// <copyright file="HtmlTextWriterTag.cs" company="Microsoft">
+//     Copyright (c) Microsoft Corporation.  All rights reserved.
+// </copyright>                                                                
+//------------------------------------------------------------------------------
+
+namespace System.Web.UI {
+    using System;
+
+
+    /// <devdoc>
+    ///    <para>[To be supplied.]</para>
+    /// </devdoc>
+    public enum HtmlTextWriterTag {
+
+
         Unknown,
 
         /// <devdoc>

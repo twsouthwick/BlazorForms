@@ -1,7 +1,19 @@
-﻿namespace BlazorForms
-{
-    internal enum HtmlTextWriterAttribute
-    {
+//------------------------------------------------------------------------------
+// <copyright file="HtmlTextWriterAttribute.cs" company="Microsoft">
+//     Copyright (c) Microsoft Corporation.  All rights reserved.
+// </copyright>
+//------------------------------------------------------------------------------
+
+namespace System.Web.UI {
+    using System;
+
+    //NOTE:  do not add within the v1 region, go to the bottom of the enum and add new items in the v2 region
+
+
+    /// <devdoc>
+    ///    <para>[To be supplied.]</para>
+    /// </devdoc>
+    public enum HtmlTextWriterAttribute {
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
