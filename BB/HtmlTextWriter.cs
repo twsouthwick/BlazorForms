@@ -7,7 +7,7 @@
     using System.Globalization;
     using System.Diagnostics;
 
-    internal class HtmlTextWriter : TextWriter
+    internal class HtmlTextWriter : TextWriter, IHtmlTextWriter
     {
         private Layout _currentLayout = new Layout(HorizontalAlign.NotSet, true /* wrap */);
         private Layout _currentWrittenLayout = null;
@@ -907,7 +907,7 @@
         // This does minimal URL encoding by converting spaces in the url to "%20".
         protected string EncodeUrl(string url)
         {
-#if NET
+#if NETFRAMEWORK
             // VSWhidbey 454348: escaped spaces in UNC share paths don't work in IE, so
             // we're not going to encode if it's a share.
             if (!UrlPath.IsUncSharePath(url))
@@ -1506,6 +1506,8 @@
         {
             HttpUtility.HtmlAttributeEncode(s, writer);
         }
+
+        public TextWriter AsTextWriter() => this;
 
         internal class Layout
         {

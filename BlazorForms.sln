@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29819.219
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorForms", "BlazorForms\BlazorForms.csproj", "{22276AF5-B63B-4CD8-A066-C3091D0A270B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorForms.App", "BlazorForms\BlazorForms.App.csproj", "{22276AF5-B63B-4CD8-A066-C3091D0A270B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspxParser", "modules\AspxParser\AspxParser\AspxParser.csproj", "{B4D46982-A2EE-4E41-A080-8BD702E379E8}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3CFB444C-73F5-428A-A48A-CCB518ABCE54}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{68F6A7A3-236C-44D0-A373-856323B48C1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorForms", "BB\BlazorForms.csproj", "{AD480922-4252-4DDB-920A-68D2BE14EC56}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +33,10 @@ Global
 		{DA2B9875-9CBD-48E1-A7BA-10C1DD099A1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA2B9875-9CBD-48E1-A7BA-10C1DD099A1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA2B9875-9CBD-48E1-A7BA-10C1DD099A1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD480922-4252-4DDB-920A-68D2BE14EC56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD480922-4252-4DDB-920A-68D2BE14EC56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD480922-4252-4DDB-920A-68D2BE14EC56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD480922-4252-4DDB-920A-68D2BE14EC56}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -39,6 +45,7 @@ Global
 		{22276AF5-B63B-4CD8-A066-C3091D0A270B} = {3CFB444C-73F5-428A-A48A-CCB518ABCE54}
 		{B4D46982-A2EE-4E41-A080-8BD702E379E8} = {3CFB444C-73F5-428A-A48A-CCB518ABCE54}
 		{DA2B9875-9CBD-48E1-A7BA-10C1DD099A1A} = {68F6A7A3-236C-44D0-A373-856323B48C1E}
+		{AD480922-4252-4DDB-920A-68D2BE14EC56} = {3CFB444C-73F5-428A-A48A-CCB518ABCE54}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BA90349F-618C-4DA3-8C2C-C33730101A8F}

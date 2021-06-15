@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Properties\**" />
+    <EmbeddedResource Remove="Properties\**" />
+    <None Remove="Properties\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BB\BlazorForms.csproj" />
     <ProjectReference Include="..\modules\AspxParser\AspxParser\AspxParser.csproj" />
   </ItemGroup>
 
@@ -18,10 +25,6 @@
     <PackageReference Include="System.CommandLine" Version="2.0.0-beta1.20104.2" />
     <PackageReference Include="System.CommandLine.DragonFruit" Version="0.3.0-alpha.20104.2" />
     <PackageReference Include="System.CommandLine.Rendering" Version="0.3.0-alpha.20104.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Properties\" />
   </ItemGroup>
 
 </Project>

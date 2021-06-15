@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\BlazorForms\BlazorForms.csproj" />
+    <ProjectReference Include="..\..\BlazorForms\BlazorForms.App.csproj" />
   </ItemGroup>
 
 </Project>
